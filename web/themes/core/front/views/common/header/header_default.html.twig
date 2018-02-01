@@ -1,0 +1,14 @@
+<div class="header clearfix">
+    <nav>
+        <ul class="nav nav-pills pull-right">
+            {% for item in data.menus.main_menus??[] %}
+                {% if (item.active??0) %}
+                    <li role="presentation" class="active"><a href="{{ item.link }}">{{ item.title }}</a></li>
+                {% else %}
+                    <li role="presentation"><a href="{{ item.link }}">{{ item.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+    <h3 class="text-muted"><a href="{{ path('index_page') }}"><b>Demo</b> Theme</a></h3>
+</div>

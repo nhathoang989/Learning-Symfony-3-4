@@ -1,0 +1,12 @@
+<footer class="footer">
+    <ul class="nav nav-pills pull-right">
+        {% for item in menus.footer_menus??[] %}
+            {% if (item.active??0) %}
+                <li role="presentation" class="active"><a href="{{ item.link }}">{{ item.title }}</a></li>
+            {% else %}
+                <li role="presentation"><a href="{{ item.link }}">{{ item.title }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <p>&copy; 2016 Company, Inc.</p>
+</footer>

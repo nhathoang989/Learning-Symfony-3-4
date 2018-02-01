@@ -1,0 +1,9 @@
+template: 'common/header/header_default.html.twig'
+css:
+js:
+    file:
+    inline:
+regions:
+    search: 'Search'
+    primary_menu: 'Primary menu'
+    secondary_menu: 'Secondary menu'

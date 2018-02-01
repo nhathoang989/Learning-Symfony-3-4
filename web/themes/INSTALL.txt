@@ -1,0 +1,3 @@
+**Please create /custom folder and add your themes
+Ex:
+    /custom/your_theme_1

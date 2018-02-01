@@ -1,0 +1,24 @@
+{% extends '@front/page.html.twig' %}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('/web/themes/front/css/user/user_page.css') }}">
+{% endblock %}
+
+{% block content %}
+  <!--=== Content Part ===-->
+  <div class="container content-sm">
+    <h1>User</h1>
+  </div><!--/container-->
+  <!-- End Content Part -->
+{% endblock %}
+
+{% block javascripts %}
+  <!-- JS Customization -->
+  <script type="text/javascript" src="{{ asset('/web/themes/front/js/user/user_page.js') }}"></script>
+  <!-- JS Page Level -->
+  <script type="text/javascript" src="{{ asset('/web/themes/front/assets/js/app.js') }}"></script>
+  <script type="text/javascript">
+    jQuery(document).ready(function () {
+      App.init();
+    });
+  </script>
+{% endblock %}

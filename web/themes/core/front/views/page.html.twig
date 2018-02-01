@@ -1,0 +1,25 @@
+{% extends '@front/base.html.twig' %}
+
+{% block page_title %}
+
+    <title>{{ page_title??'...' }} | {{ site_name??'...' }}</title>
+{% endblock %}
+
+{% block meta_tags %}
+    {% if meta_tags is defined %}
+        {% for key,value in meta_tags %}
+
+    <meta name="{{ key }}" content="{{ value }}">{% endfor %}
+    {% endif %}
+
+{% endblock %}
+
+{% block page %}
+    <div class="container">
+        {{ (regions.header??'')|raw }}
+        {% block content %}
+            <h1>Home</h1>
+        {% endblock %}
+        {{ (regions.footer??'')|raw }}
+    </div> <!-- /container -->
+{% endblock %}

@@ -1,0 +1,174 @@
+{% extends '@admin/page.html.twig' %}
+{% block stylesheets %}
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+             folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="{{ asset('/web/themes/core/admin/dist/css/skins/_all-skins.min.css') }}">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{ asset('/web/themes/core/admin/plugins/iCheck/flat/blue.css') }}">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="{{ asset('/web/themes/core/admin/plugins/morris/morris.css') }}">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="{{ asset('/web/themes/core/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="{{ asset('/web/themes/core/admin/plugins/datepicker/datepicker3.css') }}">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="{{ asset('/web/themes/core/admin/plugins/daterangepicker/daterangepicker-bs3.css') }}">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="{{ asset('/web/themes/core/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+{% endblock %}
+
+{% block content %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Managers
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('admin_page') }}"><i class="fa fa-dashboard"></i> Admin</a></li>
+            <li class="active">Managers</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Manager Search</h3>
+                    </div>
+                    <form method="get">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-4">
+                                    <label>Email</label>
+
+                                    <div class="form-group">
+                                        <input name="email" value="{{ app.request.query.get('email')??'' }}"
+                                               type="text" class="form-control" id="inputEmail" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select name="status" class="form-control">
+                                            <option value="0">All status</option>
+                                            <option value="1">Active</option>
+                                            <option value="2">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <label>Registered Date</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input name="reservation" readonly="readonly" type="text"
+                                               value="{{ data.reservation }}" class="form-control pull-right active"
+                                               id="reservation">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer clearfix">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="submit" class="btn btn-primary pull-right">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Users</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Registration Date</th>
+                                <th>Edit</th>
+                            </tr>
+                            {% if (data.item_list??[])|length > 0 %}
+                                {% for item in data.item_list??[] %}
+                                    <tr>
+                                        <td>{{ item.email }}</td>
+                                        <td>{{ item.status }}</td>
+                                        <td>{{ item.createdAt }}</td>
+                                        <td>
+                                            {% for menu in item.action_link_list %}
+                                                <a class="btn {{ menu.btn_class??'' }}"
+                                                   href="{{ menu.link }}">
+                                                    <i class="fa {{ menu.fa_class??'' }}"></i>
+                                                    {{ menu.title }}
+                                                </a>
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="4">
+                                        <div style="padding:30px 10px; text-align: center">
+                                            No item!
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </table>
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                        <!--<ul class="pagination pagination-sm no-margin pull-right">
+                            <li><a href="#">«</a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>-->
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            {% if data.pager.first_href != '' %}
+                                <li><a href="{{ data.pager.first_href }}">First</a></li>
+                            {% endif %}
+                            {% if data.pager.prev_href != '' %}
+                                <li><a href="{{ data.pager.prev_href }}">Prev</a></li>
+                            {% endif %}
+                            {% for item in data.pager.items %}
+                                {% if item.href == '' %}
+                                    <li class="active"><a href="{{ item.href }}">{{ item.title }}</a></li>
+                                {% else %}
+                                    <li><a href="{{ item.href }}">{{ item.title }}</a></li>
+
+                                {% endif %}
+                            {% endfor %}
+                            {% if data.pager.next_href != '' %}
+                                <li><a href="{{ data.pager.next_href }}">Next</a></li>
+                            {% endif %}
+                            {% if data.pager.last_href != '' %}
+                                <li><a href="{{ data.pager.last_href }}">Last</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.box -->
+
+            </div>
+            <!-- /.col -->
+
+        </div>
+        <!-- /.row -->
+
+    </section><!-- /.content -->
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('/web/themes/core/admin/js/admin_user/admin_user_page.js') }}"></script>
+{% endblock %}

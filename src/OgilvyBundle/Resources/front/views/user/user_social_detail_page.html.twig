@@ -1,0 +1,289 @@
+<html>
+<head>
+  <title>{{ page_title }}</title>
+  <style>
+    /* Center the loader */
+    #loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      margin: -40px 0 0 -40px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 80px;
+      height: 80px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+    .color-wrapper {
+      background-color: inherit;
+    }
+    #preloader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: #fff;
+      z-index: 99999999;
+    }
+    #preloader .inner {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 50%;
+      left: 0;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+    #preloader span {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #333;
+    }
+    #preloader .clock {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 10px;
+      background-color: #fff;
+      border-radius: 50%;
+      border: 1px solid #333;
+      z-index: 9;
+    }
+    #preloader .clock:after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      margin: auto;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #333;
+      z-index: 1;
+    }
+    #preloader .house,
+    #preloader .minute {
+      position: absolute;
+      height: 40%;
+      width: 1px;
+      margin: auto;
+      left: 0;
+      right: 0;
+      bottom: 50%;
+      -webkit-transform-origin: 50% 100%;
+      -moz-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+      -o-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+    }
+    #preloader .minute {
+      width: 1px;
+      height: 35%;
+      background-color: #666;
+      -webkit-animation: clock 3.6s linear infinite;
+      -moz-animation: clock 3.6s linear infinite;
+      -ms-animation: clock 3.6s linear infinite;
+      -o-animation: clock 3.6s linear infinite;
+      animation: clock 3.6s linear infinite;
+    }
+    #preloader .house {
+      width: 1px;
+      height: 30%;
+      background-color: #333;
+      -webkit-animation: clock 43.2s linear infinite;
+      -moz-animation: clock 43.2s linear infinite;
+      -ms-animation: clock 43.2s linear infinite;
+      -o-animation: clock 43.2s linear infinite;
+      animation: clock 43.2s linear infinite;
+    }
+    @-webkit-keyframes clock {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    @-moz-keyframes clock {
+      0% {
+        -moz-transform: rotate(0deg);
+      }
+
+      100% {
+        -moz-transform: rotate(360deg);
+      }
+    }
+    @-ms-keyframes clock {
+      0% {
+        -ms-transform: rotate(0deg);
+      }
+
+      100% {
+        -ms-transform: rotate(360deg);
+      }
+    }
+    @-o-keyframes clock {
+      0% {
+        -o-transform: rotate(0deg);
+      }
+
+      100% {
+        -o-transform: rotate(360deg);
+      }
+    }
+    @keyframes clock {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="preloader">
+  <div class="inner">
+    <div class="clock">
+      <div class="minute"></div>
+      <div class="house"></div>
+    </div>
+    <span>Processing...</span>
+  </div>
+</div>
+<!--=== Content Part ===-->
+<div class="container content">
+  <div class="row" id="processing" data-action="{{ path('api_user_page',{'group':'social','action':'register'}) }}">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div style="text-align: center">
+        <h3>Processing...</h3>
+      </div>
+    </div>
+  </div><!--/row-->
+</div><!--/container-->
+<!--=== End Content Part ===-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "{{ data.firebase_api_key??'' }}",
+    authDomain: "{{ data.firebase_auth_domain??'' }}",
+    databaseURL: "{{ data.firebase_database_url??'' }}",
+    storageBucket: "{{ data.firebase_storage_bucket??'' }}",
+    messagingSenderId: "{{ data.firebase_messaging_sender_id??'' }}"
+  };
+  firebase.initializeApp(config);
+</script>
+<script type="text/javascript">
+  var allowRedirect = true;
+
+  function initApp() {
+    firebase.auth().getRedirectResult().then(function (result) {
+      if (result.credential) {
+        var token = result.credential.accessToken;
+      }
+      else {
+      }
+      var user = result.user;
+    }).catch(function (error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      var email = error.email;
+      var credential = error.credential;
+      if (errorCode === 'auth/account-exists-with-different-credential') {
+        console.error('You have already signed up with a different auth provider for that email.');
+      }
+      else {
+        console.error(error);
+      }
+    });
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var providerData = user.providerData;
+
+        var action = $('#processing').data('action');
+        $.post(action,
+          {user: JSON.stringify(user, null, '')},
+          function (response) {
+            if (response.status === 1) {
+              var redirectUrl = response.data.redirect_url || '';
+              if (redirectUrl) {
+                window.location = redirectUrl;
+              }
+            }
+            else {
+              alert(response.message);
+            }
+          },
+          'json')
+          .done(function () {
+            console.log("second success");
+          })
+          .fail(function () {
+            console.error("error");
+          })
+          .always(function () {
+            console.log("finished");
+          });
+
+      }
+      else {
+        if (allowRedirect) {
+          {% if data.social_type == "facebook" %}
+          var provider = new firebase.auth.FacebookAuthProvider();
+//                        provider.addScope('user_likes');
+          {% elseif data.social_type == "google" %}
+          var provider = new firebase.auth.GoogleAuthProvider();
+          provider.addScope('https://www.googleapis.com/auth/plus.login');
+          {% elseif data.social_type == "github" %}
+          var provider = new firebase.auth.GithubAuthProvider();
+          provider.addScope('repo');
+          {% elseif data.social_type == "twitter" %}
+          var provider = new firebase.auth.TwitterAuthProvider();
+          {% else %}
+          var provider = new firebase.auth.FacebookAuthProvider();
+          provider.addScope('user_likes');
+          {% endif %}
+          firebase.auth().signInWithRedirect(provider);
+        }
+        document.getElementById('btnLogout').style.visibility = false;
+        document.getElementById('quickstart-account-details').textContent = '...';
+      }
+    });
+  }
+
+  window.onload = function () {
+    initApp();
+  };
+
+  function signOut() {
+    allowRedirect = false;
+    firebase.auth().signOut();
+  }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+{% extends '@front/page.html.twig' %}
+
+{% block content %}
+  <!--=== Content Part ===-->
+  <div class="container content">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        {{ form_start(data.user_site_edit_form,{'attr':{'class':'sky-form'}}) }}
+        <header>Edit Site</header>
+        <fieldset>
+          <section>
+
+            <div class="row">
+              {{ form_label(data.user_site_edit_form.name,'Site Name', {'label_attr': {'class':'label col col-3'}}) }}
+              <div class="col col-9">
+                <label class="input">
+                  <i class="icon-append fa fa-user"></i>
+                  {{ form_widget(data.user_site_edit_form.name, {'attr': {'placeholder':'Site name'}}) }}
+                </label>
+              </div>
+            </div>
+          </section>
+          <section>
+
+            <div class="row">
+              {{ form_label(data.user_site_edit_form.domain,'Domain', {'label_attr': {'class':'label col col-3'}}) }}
+              <div class="col col-9">
+                <label class="input">
+                  <i class="icon-append fa fa-user"></i>
+                  {{ form_widget(data.user_site_edit_form.domain, {'attr': {'placeholder':'Ex: abc.com'}}) }}
+                </label>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="row">
+              {{ form_label(data.user_site_edit_form.siteCategoryId,'Site Category', {'label_attr': {'class':'label col col-3'}}) }}
+              <div class="col col-9">
+                <label class="select">
+                  {{ form_widget(data.user_site_edit_form.siteCategoryId, {'attr': {}}) }}
+                  <i></i>
+                </label>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="row">
+              {{ form_label(data.user_site_edit_form.status,'Status', {'label_attr': {'class':'label col col-3'}}) }}
+              <div class="col col-9">
+                <label class="select">
+                  {{ form_widget(data.user_site_edit_form.status, {'attr': {}}) }}
+                  <i></i>
+                </label>
+              </div>
+            </div>
+          </section>
+        </fieldset>
+
+
+        <footer>
+          <button class="btn-u btn-site-edit-submit" type="button">Update</button>
+        </footer>
+        {{ form_end(data.user_site_edit_form) }}
+      </div>
+    </div>
+  </div><!--/container-->
+  <!--=== End Content Part ===-->
+
+{% endblock %}

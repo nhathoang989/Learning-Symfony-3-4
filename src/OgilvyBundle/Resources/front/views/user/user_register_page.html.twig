@@ -1,0 +1,60 @@
+{% extends '@front/page.html.twig' %}
+
+{% block content %}
+  <!--=== Content Part ===-->
+  <div class="container content">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <h3>Register</h3>
+        <hr>
+        {% set error_email = data.errors.email.ERROR ?? '' %}
+        {% set error_password = data.errors.password.ERROR ?? '' %}
+        {% set error_password2 = data.errors.password.first.ERROR ?? '' %}
+        {{ form_start(data.user_register_form,{'attr':{}}) }}
+        <div class="form-group{% if error_email %} has-error{% endif %}">
+          {{ form_label(data.user_register_form.email) }}
+          {{ form_widget(data.user_register_form.email, {'attr': {'class':'form-control', 'placeholder':'Email address'}}) }}
+          {{ form_errors(data.user_register_form.email) }}
+          {% if error_email %}
+            <em for="user_register_form_email" class="help-block" style="display: block;">
+              {{ error_email }}
+            </em>
+          {% endif %}
+        </div>
+
+        <div class="form-group{% if error_password %} has-error{% endif %}">
+          {{ form_label(data.user_register_form.password.first) }}
+          {{ form_widget(data.user_register_form.password.first, {'attr': {'class':'form-control', 'placeholder':'Password', 'autocomplete':'off'}}) }}
+          {{ form_errors(data.user_register_form.password.first) }}
+          {% if error_password %}
+            <em for="user_register_form_password" class="help-block" style="display: block;">
+              {{ error_password }}
+            </em>
+          {% endif %}
+        </div>
+
+        <div class="form-group{% if error_password2 %} has-error{% endif %}">
+          {{ form_label(data.user_register_form.password.second) }}
+          {{ form_widget(data.user_register_form.password.second, {'attr': {'class':'form-control', 'placeholder':'Confirm Password'}}) }}
+          {{ form_errors(data.user_register_form.password.second) }}
+          {% if error_password2 %}
+            <em for="user_register_form_password" class="help-block" style="display: block;">
+              {{ error_password2 }}
+            </em>
+          {% endif %}
+        </div>
+
+        <input type="hidden" name="ajax" value="0">
+        <button class="btn btn-success btn-register-submit" type="submit">Register</button>
+        {{ form_end(data.user_register_form) }}
+        <hr>
+        <h4>Are you have an account ?</h4>
+        <p><a class="color-green" href="{{ path('user_login_page') }}">click here</a> to login the website.</p>
+      </div>
+    </div>
+  </div><!--/container-->
+
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

@@ -1,0 +1,2 @@
+{% for key,item in scripts.file %}
+  <script type="text/javascript" src="{{ asset('' ~ item) }}"></script>{% endfor %}

@@ -1,0 +1,12 @@
+template: 'common/footer/footer_default.html.twig'
+css:
+js:
+    file:
+    inline:
+footer:
+    footer_first: 'Footer first'
+    footer_second: 'Footer second'
+    footer_third: 'Footer third'
+    footer_fourth: 'Footer fourth'
+    footer_menu: 'Footer menus'
+    footer_socials: 'Footer socials'

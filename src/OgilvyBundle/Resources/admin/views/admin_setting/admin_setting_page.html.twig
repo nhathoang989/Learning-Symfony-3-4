@@ -1,0 +1,91 @@
+{% extends '@admin/page.html.twig' %}
+
+
+{% block content %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Settings
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('admin_page') }}"><i class="fa fa-dashboard"></i> Admin</a></li>
+            <li class="active">Settings</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Setting</h3>
+                    </div>
+                    {{ form_start(data.admin_setting_form) }}
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-3">
+                                {{ form_label(data.admin_setting_form.siteTitle) }}
+                            </div>
+                            <div class="col-xs-12 col-md-9">
+                                <div class="form-group">
+                                    {{ form_errors(data.admin_setting_form.siteTitle) }}
+                                    {{ form_widget(data.admin_setting_form.siteTitle, {'attr': {'class':'form-control','placeholder':'OOCMS'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-3">
+                                {{ form_label(data.admin_setting_form.siteMetaDescription) }}
+                            </div>
+                            <div class="col-xs-12 col-md-9">
+                                <div class="form-group">
+                                    {{ form_errors(data.admin_setting_form.siteMetaDescription) }}
+                                    {{ form_widget(data.admin_setting_form.siteMetaDescription, {'attr': {'class':'form-control','placeholder':'Site meta description'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-3">
+                                {{ form_label(data.admin_setting_form.siteHomePage) }}
+                            </div>
+                            <div class="col-xs-12 col-md-9">
+                                <div class="form-group">
+                                    {{ form_errors(data.admin_setting_form.siteHomePage) }}
+                                    {{ form_widget(data.admin_setting_form.siteHomePage, {'attr': {'class':'form-control','placeholder':'Site home page'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-3">
+                                {{ form_label(data.admin_setting_form.siteAdminPage) }}
+                            </div>
+                            <div class="col-xs-12 col-md-9">
+                                <div class="form-group">
+                                    {{ form_errors(data.admin_setting_form.siteAdminPage) }}
+                                    {{ form_widget(data.admin_setting_form.siteAdminPage, {'attr': {'class':'form-control','placeholder':'Site admin page'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="box-footer clearfix">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="submit" class="btn btn-primary pull-right">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_end(data.admin_setting_form) }}
+                </div>
+
+            </div>
+            <!-- /.col -->
+
+        </div>
+    </section>
+    <!-- /.row -->
+
+
+{% endblock %}
