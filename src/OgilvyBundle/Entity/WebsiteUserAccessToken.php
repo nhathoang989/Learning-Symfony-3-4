@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * WebsiteUserAccessToken
  *
  * @ORM\Table(name="website_user_access_token")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\WebsiteUserAccessTokenRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\WebsiteUserAccessTokenRepository")
  */
 class WebsiteUserAccessToken
 {

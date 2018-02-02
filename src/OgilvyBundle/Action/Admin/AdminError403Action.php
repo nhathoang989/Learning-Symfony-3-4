@@ -2,7 +2,7 @@
 
 namespace OgilvyBundle\Action\Error;
 
-use OgilvyBundle\CoreAdminController;
+use OgilvyBundle\Controller\CoreAdminController;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminError403Action

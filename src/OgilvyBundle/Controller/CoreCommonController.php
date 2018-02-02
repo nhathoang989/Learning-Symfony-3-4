@@ -8,15 +8,15 @@
 
 namespace OgilvyBundle\Controller;
 
-use CoreBundle\Entity\EntityFile;
-use CoreBundle\Entity\File;
-use CoreBundle\Entity\FriendlyUrl;
-use CoreBundle\Entity\NodeTerm;
-use CoreBundle\Entity\PageMeta;
-use CoreBundle\Entity\SystemConfig;
-use CoreBundle\Entity\WebsiteUserAccessToken;
-use CoreBundle\Utility\HtmlParser;
-use CoreBundle\Utility\Pager;
+use OgilvyBundle\Entity\EntityFile;
+use OgilvyBundle\Entity\File;
+use OgilvyBundle\Entity\FriendlyUrl;
+use OgilvyBundle\Entity\NodeTerm;
+use OgilvyBundle\Entity\PageMeta;
+use OgilvyBundle\Entity\SystemConfig;
+use OgilvyBundle\Entity\WebsiteUserAccessToken;
+use OgilvyBundle\Utility\HtmlParser;
+use OgilvyBundle\Utility\Pager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -305,7 +305,7 @@ class CoreCommonController extends Controller
                 $username.time().rand(0, 10000000)
             );
         $entity = $this->_getEntityByConditions(
-            'CoreBundle:WebsiteUserAccessToken',
+            'OgilvyBundle:WebsiteUserAccessToken',
             ['username' => $username]
         );
         if ($entity) {
@@ -603,7 +603,7 @@ class CoreCommonController extends Controller
 
     public function _loadFileById($fileId)
     {
-        $currentImageFile = $this->_getEntityByID('CoreBundle:File', $fileId);
+        $currentImageFile = $this->_getEntityByID('OgilvyBundle:File', $fileId);
         if ($currentImageFile) {
             return $currentImageFile;
         } else {
@@ -636,7 +636,7 @@ class CoreCommonController extends Controller
     {
         $pageId = strtoupper($pageId);
         $pageMetaEntity = $this->_getEntityByConditions(
-            'CoreBundle:PageMeta',
+            'OgilvyBundle:PageMeta',
             [
                 'pageId' => $pageId,
                 'metaCode' => $metaCode,
@@ -658,7 +658,7 @@ class CoreCommonController extends Controller
     public function _getPageMetas($pageId)
     {
         $dql = "SELECT pm.metaCode, pm.metaValue
-            FROM CoreBundle:PageMeta pm
+            FROM OgilvyBundle:PageMeta pm
             WHERE pm.pageId = :pageId";
         $arr = $this->_executeDQL($dql, ['pageId' => $pageId]);
         $variables = [];
@@ -674,7 +674,7 @@ class CoreCommonController extends Controller
 
 
         $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
-        $q = $qb->update('CoreBundle:NodeTerm', 'nt')
+        $q = $qb->update('OgilvyBundle:NodeTerm', 'nt')
             ->set('nt.status', $qb->expr()->literal(0))
             ->where('nt.nodeId = :nodeId')
             ->setParameter('nodeId', $nodeId)
@@ -684,7 +684,7 @@ class CoreCommonController extends Controller
 
         foreach ($termIds as $termId) {
             $nodeTermEntity = $this->_getEntityByConditions(
-                'CoreBundle:NodeTerm',
+                'OgilvyBundle:NodeTerm',
                 [
                     'nodeId' => $nodeId,
                     'termId' => $termId,
@@ -709,7 +709,7 @@ class CoreCommonController extends Controller
     {
         $arr = $this->_executeDQL(
             "SELECT nt.termId
-          FROM CoreBundle:NodeTerm nt
+          FROM OgilvyBundle:NodeTerm nt
           WHERE nt.nodeId = :nodeId
           AND nt.status = 1
           ORDER BY nt.id",
@@ -727,7 +727,7 @@ class CoreCommonController extends Controller
     {
         $arr = $this->_executeDQL(
             "SELECT t.id, t.name
-          FROM CoreBundle:Term t
+          FROM OgilvyBundle:Term t
           WHERE t.taxonomyCode = :taxonomyCode
           ORDER BY t.weight ASC, t.id ASC",
             ['taxonomyCode' => $taxonomyCode]
@@ -762,7 +762,7 @@ class CoreCommonController extends Controller
     public function _updateFriendlyUrl($source, $alias, $langcode = '')
     {
         $currentFriendlyUrlEntity = $this->_getEntityByConditions(
-            'CoreBundle:FriendlyUrl',
+            'OgilvyBundle:FriendlyUrl',
             ['source' => $source]
         );
         if ($currentFriendlyUrlEntity) {
@@ -807,7 +807,7 @@ class CoreCommonController extends Controller
         global $variables;
         if (!is_array($variables)) {
             $dql = 'SELECT sc.name,sc.value
-            FROM CoreBundle:SystemConfig sc';
+            FROM OgilvyBundle:SystemConfig sc';
             $arr = $this->_executeDQL($dql, []);
             $variables = [];
             foreach ($arr as $value) {
@@ -831,7 +831,7 @@ class CoreCommonController extends Controller
     function _variableSet($key, $value)
     {
         if ($currentSetting = $this->_getEntityByConditions(
-            'CoreBundle:SystemConfig',
+            'OgilvyBundle:SystemConfig',
             ['name' => $key]
         )
         ) {
@@ -1110,7 +1110,7 @@ class CoreCommonController extends Controller
 
     public function encodePassword($email, $password)
     {
-        return \CoreBundle\Utility\SitePassword::encodePassword(
+        return \OgilvyBundle\Utility\SitePassword::encodePassword(
             $this,
             $email,
             $password
@@ -1119,7 +1119,7 @@ class CoreCommonController extends Controller
 
     public function encodeAdminPassword($email, $password)
     {
-        return \CoreBundle\Utility\SitePassword::encodeAdminPassword(
+        return \OgilvyBundle\Utility\SitePassword::encodeAdminPassword(
             $this,
             $email,
             $password
@@ -1149,7 +1149,7 @@ class CoreCommonController extends Controller
 
     public function _getFileById($fileId)
     {
-        return $this->_getEntityByID('CoreBundle:File', $fileId);
+        return $this->_getEntityByID('OgilvyBundle:File', $fileId);
     }
 
     public function _getEntityByConditions($entity, $conditions)
@@ -1306,7 +1306,7 @@ class CoreCommonController extends Controller
             $pre = '';
         }
         $currentFriendlyUrlEntity = $this->_getEntityByConditions(
-            'CoreBundle:FriendlyUrl',
+            'OgilvyBundle:FriendlyUrl',
             ['source' => $url0]
         );
         if ($currentFriendlyUrlEntity && $currentFriendlyUrlEntity->getAlias()) {

@@ -2,7 +2,7 @@
 
 namespace OgilvyBundle\Action\Page;
 
-use OgilvyBundle\CoreFrontController;
+use OgilvyBundle\Controller\CoreFrontController;
 use Symfony\Component\HttpFoundation\Request;
 
 class IndexAction
@@ -14,7 +14,7 @@ class IndexAction
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public static function all(CoreFrontController $_this, Request $request)
+    public static function all (CoreFrontController $_this, Request $request)
     {
         $siteHomePage = $_this->_variableGet('SITE_HOME_PAGE');
         if ($siteHomePage) {
@@ -33,9 +33,9 @@ class IndexAction
                 }
                 if ($_route != 'index_page') {
                     return $_this->forward(
-                      $_controller,
-                      $arrParams,
-                      $request->query->all()
+                        $_controller,
+                        $arrParams,
+                        $request->query->all()
                     );
                 }
             } catch (\Exception $e) {
@@ -44,20 +44,20 @@ class IndexAction
 
         $_this->_setPageTitle('Home page');
         $_this->_setMetaTags(
-          [
-            'title' => 'Home page',
-            'description' => '...',
-          ]
+            [
+                'title' => 'Home page',
+                'description' => '...',
+            ]
         );
 
         $data = [];
         $data['description'] = 'ahihi';
 
         return $_this->render(
-          '@front/page/index_page.html.twig',
-          [
-            'data' => $data,
-          ]
+            '@front/page/index_page.html.twig',
+            [
+                'data' => $data
+            ]
         );
     }
 }

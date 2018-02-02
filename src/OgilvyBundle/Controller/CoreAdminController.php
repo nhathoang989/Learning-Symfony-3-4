@@ -15,6 +15,25 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CoreAdminController extends CoreCommonController
 {
+    protected $request;
+    /**
+     *
+     */
+    public function setRequest($request)
+    {
+        $this->request = $request;
+
+        return $this->request;
+    }
+
+    /**
+     * Get reqeust
+     *
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
 
     public function _adminError403Action(Request $request)
     {
@@ -39,8 +58,8 @@ class CoreAdminController extends CoreCommonController
         } else {
             $currentUserId = 0;
         }
-        $request = $this->container->get('request');
-        $routeName = $request->get('_route');
+        //$request = $this->container->get('request');
+        $routeName = $this->request->get('_route');
         $parameters['site_name'] = $this->_variableGet('SITE_TITLE');
         $parameters['page_title'] = $this->_getPageTitle();
         $parameters['meta_tags'] = $this->_getMetaTags();

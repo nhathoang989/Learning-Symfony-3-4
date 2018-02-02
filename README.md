@@ -1,10 +1,23 @@
 be-symfony-33-v2
 ================
 
+- Commands
+
+    composer update   
+    
+    php bin/console debug:router // View routers
+    
+    php vendor/behat/behat/bin/behat --name=login // run behat test scenarios
+    
+    php bin/console generate:bundle --namespace=OgilvyBundle
+    
+    composer dump-autoload // reload bundles
+
 A Symfony project created on January 29, 2018, 5:25 am.
 
 service:
         user_provider: fos_user.user_provider.username
+        
 - using Repository 
 
     Ex: $repository = $this->getDoctrine()->getRepository(User::class);
@@ -111,5 +124,10 @@ service:
             class: CoreBundle\Listener\ResponseListener
             tags:
                - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+                   
     
+    Response HTML
     
+         format_listener:
+                rules:
+                    - { priorities: ['json', 'html'], fallback_format: json, prefer_extension: false }

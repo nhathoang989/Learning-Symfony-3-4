@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * EntityFile
  *
  * @ORM\Table(name="entity_file")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\EntityFileRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\EntityFileRepository")
  */
 class EntityFile
 {

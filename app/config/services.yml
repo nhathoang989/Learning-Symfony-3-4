@@ -34,6 +34,14 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
+    app.admin_token_authenticator:
+        class: OgilvyBundle\Security\AdminUserTokenAuthenticator
+        arguments: ['@doctrine.orm.entity_manager']
+
+    kernel.listener.response_listener:
+        class: OgilvyBundle\Listener\ResponseListener
+        tags:
+           - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
     app.form.registration:
        class: AppBundleFormRegistrationType

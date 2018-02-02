@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * GeoLocation
  *
  * @ORM\Table(name="geo_location")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\GeoLocationRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\GeoLocationRepository")
  */
 class GeoLocation
 {

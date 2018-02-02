@@ -3,7 +3,7 @@
 namespace OgilvyBundle\Action\AdminMenu;
 
 
-use OgilvyBundle\CoreAdminController;
+use OgilvyBundle\Controller\CoreAdminController;
 use OgilvyBundle\Entity\Menu;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

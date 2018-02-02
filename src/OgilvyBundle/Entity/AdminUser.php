@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * AdminUser
  *
  * @ORM\Table(name="admin_user")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\AdminUserRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\AdminUserRepository")
  */
 class AdminUser implements UserInterface, \Serializable
 {

@@ -3,7 +3,7 @@
 namespace OgilvyBundle\Action\AdminUser;
 
 
-use OgilvyBundle\CoreAdminController;
+use OgilvyBundle\Controller\CoreAdminController;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

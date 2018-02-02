@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends CoreAdminController
 {
-
     /**
      * @Route("/admin", name="admin_page")
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -19,7 +18,12 @@ class AdminController extends CoreAdminController
      */
     public function adminAction(Request $request)
     {
-        return AdminAction::all($this, $request);
+        $this->request = $request;
+        $action = new AdminAction();
+        
+        
+        
+        return $action->all($this, $request);
     }
 
     /**
@@ -30,7 +34,11 @@ class AdminController extends CoreAdminController
      */
     public function adminLoginAction(Request $request)
     {
-        return AdminLoginAction::all($this, $request);
+        //dump($this->getUser());die;
+        $this->request = $request;
+        $currentUser = $this->get('security.token_storage')->getToken()->getUser();//$_this->getUser();
+        //dump($object);die;
+        return AdminLoginAction::all($this, $request, $currentUser);
     }
 
     /**

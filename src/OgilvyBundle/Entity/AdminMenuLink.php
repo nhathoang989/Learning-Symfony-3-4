@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * MenuLink
  *
  * @ORM\Table(name="admin_menu_link")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\AdminMenuLinkRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\AdminMenuLinkRepository")
  */
 class AdminMenuLink
 {

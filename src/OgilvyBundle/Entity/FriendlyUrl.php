@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * FriendlyUrl
  *
  * @ORM\Table(name="friendly_url")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\FriendlyUrlRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\FriendlyUrlRepository")
  */
 class FriendlyUrl
 {

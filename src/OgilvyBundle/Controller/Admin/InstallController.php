@@ -18,6 +18,7 @@ class InstallController extends CoreCommonController
      */
     public function installAction(Request $request)
     {
+        
         return InstallAction::all($this, $request);
     }
 

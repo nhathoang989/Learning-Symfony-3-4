@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * User
  *
  * @ORM\Table(name="website_user")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\WebsiteUserRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\WebsiteUserRepository")
  */
 class WebsiteUser implements UserInterface, AdvancedUserInterface, \Serializable
 {

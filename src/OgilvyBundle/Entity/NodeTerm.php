@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * NodeTerm
  *
  * @ORM\Table(name="node_term")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\NodeTermRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\NodeTermRepository")
  */
 class NodeTerm
 {

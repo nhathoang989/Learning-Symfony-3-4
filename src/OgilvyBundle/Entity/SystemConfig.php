@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * SystemConfig
  *
  * @ORM\Table(name="system_config")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\SystemConfigRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\SystemConfigRepository")
  */
 class SystemConfig
 {

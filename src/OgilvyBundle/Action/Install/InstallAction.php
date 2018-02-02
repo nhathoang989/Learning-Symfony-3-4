@@ -2,8 +2,8 @@
 
 namespace OgilvyBundle\Action\Install;
 
+use OgilvyBundle\Controller\CoreCommonController;
 use OgilvyBundle\Entity\AdminUser;
-use OgilvyBundle\CoreCommonController;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

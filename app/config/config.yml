@@ -37,8 +37,16 @@ framework:
 # Twig Configuration
 twig:
     debug: '%kernel.debug%'
+    strict_variables: "%kernel.debug%"
     strict_variables: '%kernel.debug%'
-
+    globals:
+        base_path: "%base_path%"
+    paths:
+        "%kernel.root_dir%/..%front_theme_id%": front
+        "%kernel.root_dir%/../src/OgilvyBundle/Resources/front/views/": front
+        "%kernel.root_dir%/..%admin_theme_id%": admin
+        "%kernel.root_dir%/../src/OgilvyBundle/Resources/admin/views/": admin
+        "%kernel.root_dir%/../web/themes/core/system/views/": system
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -79,7 +87,7 @@ fos_rest:
                                                         # will eventually be JSON formated
     format_listener:
         rules:
-            - { priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
+            - { priorities: ['json', 'html'], fallback_format: json, prefer_extension: false }
     view:
         view_response_listener: true
 

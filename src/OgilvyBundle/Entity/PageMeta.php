@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * PageMeta
  *
  * @ORM\Table(name="page_meta")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\PageMetaRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\PageMetaRepository")
  */
 class PageMeta
 {

@@ -5,6 +5,10 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username_email       # fos_user.user_provider.username_email does not seem to work (OAuth-spec related ("username + password") ?)
+
+        admin_user_provider:
+            entity:
+                class: OgilvyBundle:AdminUser
     firewalls:
         oauth_token:                                   # Everyone can access the access token URL.
             pattern: ^/oauth/v2/token
@@ -14,6 +18,38 @@ security:
             fos_oauth: true                            # OAuth2 protected resource
             stateless: true                            # Do no set session cookies
             anonymous: true                           # Anonymous access is not allowed
+
+        admin_login:
+            # logout: ~
+            pattern:   ^/admin
+            anonymous: ~
+            provider: admin_user_provider
+            remember_me:
+                secret: '%secret%'
+                name: "_a_u_"
+                always_remember_me: true
+                lifetime: 604800 # 1 week in seconds
+                path: /
+            form_login:
+                login_path: admin_login_page
+                check_path: admin_login_page
+                always_use_default_target_path: false
+                default_target_path: /admin
+                target_path_parameter: _target_path
+                use_referer: true
+                failure_path: /admin/login
+                failure_forward: true
+                failure_path_parameter: _failure_path
+                #csrf_token_generator: security.csrf.token_manager
+            logout:
+                path: /admin/logout
+                target: /admin
+                invalidate_session: true
+                delete_cookies:
+            guard:
+                authenticators:
+                    - app.admin_token_authenticator
+
 
     access_control:
 

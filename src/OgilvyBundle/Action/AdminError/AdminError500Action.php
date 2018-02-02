@@ -2,7 +2,7 @@
 
 namespace OgilvyBundle\Action\AdminError;
 
-use OgilvyBundle\CoreAdminController;
+use OgilvyBundle\Controller\CoreAdminController;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminError500Action

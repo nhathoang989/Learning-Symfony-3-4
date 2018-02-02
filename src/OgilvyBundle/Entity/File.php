@@ -13,7 +13,7 @@ use Gregwar\Image\Image;
  * File
  *
  * @ORM\Table(name="file")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\FileRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\FileRepository")
  */
 class File
 {

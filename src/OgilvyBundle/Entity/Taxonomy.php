@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Taxonomy
  *
  * @ORM\Table(name="taxonomy")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\TaxonomyRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\TaxonomyRepository")
  */
 class Taxonomy
 {

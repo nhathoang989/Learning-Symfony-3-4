@@ -3,7 +3,7 @@
 namespace OgilvyBundle\Action\AdminSetting;
 
 
-use OgilvyBundle\CoreAdminController;
+use OgilvyBundle\Controller\CoreAdminController;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

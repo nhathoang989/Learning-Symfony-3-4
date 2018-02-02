@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * LoginLog
  *
  * @ORM\Table(name="login_log")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\LoginLogRepository")
+ * @ORM\Entity(repositoryClass="OgilvyBundle\Repository\LoginLogRepository")
  */
 class LoginLog
 {
